@@ -1,0 +1,170 @@
+<html><head><base href=""></head>
+<meta charset="UTF-8">
+<title>Pedido Especial de Casamento 💍</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .game-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+  }
+
+  .level {
+    display: none;
+  }
+
+  .active {
+    display: block;
+  }
+
+  .heart {
+    color: #ff1493;
+    font-size: 40px;
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+  button {
+    background: #ff1493;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 25px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    background: #ff69b4;
+  }
+
+  .final-message {
+    display: none;
+    font-size: 24px;
+    color: #ff1493;
+    margin: 20px 0;
+  }
+
+  .choice-buttons {
+    display: none;
+  }
+
+  input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 2px solid #ff69b4;
+  }
+</style>
+
+<div class="game-container">
+  <div id="level1" class="level active">
+    <h2>Nível 1: Nosso Primeiro Encontro</h2>
+    <p>Qual foi o local do nosso primeiro encontro?</p>
+    <input type="text" id="answer1">
+    <button onclick="checkLevel1()">Próximo</button>
+  </div>
+
+  <div id="level2" class="level">
+    <h2>Nível 2: Nossa Música</h2>
+    <p>Complete a frase da nossa música especial:</p>
+    <p>"Amor da minha vida..."</p>
+    <input type="text" id="answer2">
+    <button onclick="checkLevel2()">Próximo</button>
+  </div>
+
+  <div id="level3" class="level">
+    <h2>Nível 3: Momento Especial</h2>
+    <p>Quantos meses completamos juntos?</p>
+    <input type="number" id="answer3">
+    <button onclick="checkLevel3()">Próximo</button>
+  </div>
+
+  <div id="final-screen" class="level">
+    <span class="heart">💝</span>
+    <h2>Meu Amor...</h2>
+    <div class="final-message">
+      Desde o primeiro dia em que te vi, soube que você era especial.
+      Cada momento ao seu lado tem sido mágico, cada sorriso seu ilumina meu dia.
+      Não consigo imaginar minha vida sem você...
+      
+      Quer se casar comigo? 💍
+    </div>
+    <div class="choice-buttons">
+      <button onclick="answer(true)" style="background: #4CAF50">SIM! ❤️</button>
+      <button onclick="answer(false)" style="background: #f44336">Não 💔</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentLevel = 1;
+
+function showLevel(level) {
+  document.querySelectorAll('.level').forEach(el => el.classList.remove('active'));
+  document.getElementById(`level${level}`).classList.add('active');
+}
+
+function checkLevel1() {
+  const answer = document.getElementById('answer1').value.toLowerCase();
+  // Aceita qualquer resposta
+  currentLevel = 2;
+  showLevel(2);
+}
+
+function checkLevel2() {
+  const answer = document.getElementById('answer2').value.toLowerCase();
+  // Aceita qualquer resposta
+  currentLevel = 3;
+  showLevel(3);
+}
+
+function checkLevel3() {
+  const answer = document.getElementById('answer3').value;
+  // Aceita qualquer resposta
+  showFinal();
+}
+
+function showFinal() {
+  document.querySelectorAll('.level').forEach(el => el.classList.remove('active'));
+  document.getElementById('final-screen').classList.add('active');
+  
+  setTimeout(() => {
+    document.querySelector('.final-message').style.display = 'block';
+    setTimeout(() => {
+      document.querySelector('.choice-buttons').style.display = 'block';
+    }, 3000);
+  }, 1000);
+}
+
+function answer(response) {
+  if (response) {
+    alert('❤️ Você fez de mim o homem mais feliz do mundo! ❤️');
+  } else {
+    alert('😢 Posso tentar te conquistar novamente?');
+  }
+}
+</script>
+</html>
